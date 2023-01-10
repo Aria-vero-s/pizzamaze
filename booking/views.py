@@ -6,6 +6,18 @@ from django.contrib import messages
 def index(request):
     return render(request, "index.html",{})
 
+def about(request):
+    return render(request, "about.html",{})
+
+def contact(request):
+    return render(request, "contact.html",{})
+
+def menu(request):
+    return render(request, "menu.html",{})
+
+def bookingpage(request):
+    return render(request, "bookingpage.html",{})
+
 def booking(request):
     #Calling 'validWeekday' Function to Loop days you want in the next 21 days:
     weekdays = validWeekday(22)
