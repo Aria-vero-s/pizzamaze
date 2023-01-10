@@ -1,0 +1,127 @@
+/* color palette: #ef8354, #6d6875, #eef0f2, #ddd92a, #a7c283 */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200&display=swap');
+
+body{
+    background-color: #EEF0F2;
+    color: #5C6452;
+    font-family: 'Montserrat', sans-serif;
+}
+
+h1 {
+  color: #EF8354;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #6D6875;
+  }
+  
+  li {
+    float: left;
+  }
+  
+  li a {
+    display: block;
+    color: #EEF0F2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  
+  li a:hover {
+    background-color: #EEF0F2;
+    color: #5C6452;
+  }
+
+  /* ethos */
+
+  .ethos {
+    font-size: xx-large;
+    color:#fff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  /* about */
+
+.about {
+    font-size: xx-large;
+    color:#fff;
+    position: absolute;
+    top: 50%;
+    left: 75%;
+    transform: translate(-50%, -70%);
+  }
+
+  /* menu */
+
+  .menu {
+    font-size: xx-large;
+    color:#000;
+    position: absolute;
+    background-image: url(../assets/images/bruschetta.avif);
+    width:100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+/* Form */
+
+.form-section {
+  background-position: center;
+  height: 900px;
+}
+
+.signup-form {
+  color:#6d6875;
+  background-color: #fff;
+  position: cover;
+  padding: 30px;
+}
+
+.signup-form > h2 {
+  color: #6d6875;
+  margin-bottom: 20px;
+}
+
+.text-input {
+  background:transparent;
+  color: #6d6875;
+  width: 100%;
+  height: 25px;
+  margin: 5px 0 20px;
+  border: 1px solid #6d6875;
+  border-radius: 2px;
+}
+.text-input:hover{
+  border-color: #ddd92a;
+}
+
+.submit-button{
+  margin-top: 20px;
+  padding: 15px 32px 15px 32px;
+  text-align: center;
+  font-size: 100%;
+  background-color: #a7c283;
+  color: #fafafa;
+  display:block;
+}
+
+.submit-button:hover{
+  background-color: #ddd92a;
+  color: #fafafa;
+}
+
+#thankyou {
+  height: 400px;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  padding-left:50px;
+  padding-top: 50px;
+}
