@@ -79,7 +79,7 @@ def bookingSubmit(request):
                                 day = day,
                                 time = time,
                             )
-                            messages.success(request, "Appointment Saved!")
+                            messages.success(request, "Booking Saved!")
                             return redirect('index')
                         else:
                             messages.success(request, "The Selected Time Has Been Reserved Before!")
