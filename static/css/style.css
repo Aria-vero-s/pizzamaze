@@ -39,10 +39,12 @@ li a:hover {
   /* ethos */
 
   .ethos {
-    font-size: xx-large;
+    font-size: 50px;
     color:#fff;
     position: absolute;
-    top: 50%;
+    width:40%;
+    line-height: 60%;
+    top: 30%;
     left: 50%;
     transform: translate(-50%, -50%);
   }
@@ -79,7 +81,6 @@ li a:hover {
 
 .signup-form {
   color:#6d6875;
-  background-color: #fff;
   position: cover;
   padding: 30px;
 }
@@ -99,7 +100,7 @@ li a:hover {
   border-radius: 2px;
 }
 .text-input:hover{
-  border-color: #ddd92a;
+  border-color: #EF8354;
 }
 
 .submit-button{
@@ -107,13 +108,14 @@ li a:hover {
   padding: 15px 32px 15px 32px;
   text-align: center;
   font-size: 100%;
-  background-color: #a7c283;
+  background-color: #b0b0b0;
   color: #fafafa;
   display:block;
+  border: none;
 }
 
 .submit-button:hover{
-  background-color: #ddd92a;
+  background-color: #a7c283;
   color: #fafafa;
 }
 
@@ -125,3 +127,4 @@ li a:hover {
   padding-left:50px;
   padding-top: 50px;
 }
+

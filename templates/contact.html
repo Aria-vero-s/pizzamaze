@@ -17,7 +17,8 @@
 <body>
 
     <h1 style="margin-left: 40px; padding-top: 20px;"><strong>Pizza</strong>maze</h1>
-    <h2>Contact</h2>
+    <h2 style="margin-left: 40px; margin-top: -20px;">italian restaurant</h2>
+
     <ul style="padding-left: 30px;">
         <li><a href="{% url 'index' %}">Home</a></li>
         <li><a href="{% url 'about' %}">About</a></li>
@@ -25,11 +26,29 @@
         <li><a href="{% url 'bookingpage' %}">Booking</a></li>
         <li><a href="{% url 'contact' %}">Contact</a></li>
     </ul>
-    
-    
-    <img src="{% static "spag1.avif" %}" style="width:100%;">
-    <div class="ethos">A new italian restaurant near you!</div>
-    
+
+    <h2 style="margin-left: 40px; padding-top: 20px;">Contact us</h2>
+
+    <section class="form-section">
+        
+        <form method="GET" action="feedback.html" class="signup-form">
+            
+            <label for="fname">First Name</label>
+            <input id="fname" class="text-input" name="first_name" type="text" required>
+            
+            <label for="lname">Last Name</label>
+            <input id="lname" class="text-input" name="last_name" type="text" required>
+            
+            <label for="email">Email Address</label>
+            <input type="email" class="text-input" id="email" name="email_address" required>
+            
+            <label for="comment">Leave a comment</label>
+            <textarea id="comment" class="text-input" name="comment" type="text" style="height:100px; text-align: start;"></textarea>
+            
+            <input class="submit-button" type="submit" value="submit">
+        </form>
+    </section>
+
     <footer class="footer mt-auto py-3 dark-bg">
         <p class="m-0 text-center text-red">Made by <a href="https://github.com/Aria-vero-s">Aria-vero-s</a></p>
         <p class="m-0 text-center text-red">Follow us: <i class="fab fa-facebook-square ms-3"></i>
