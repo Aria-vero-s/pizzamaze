@@ -10,4 +10,7 @@ urlpatterns = [
     path('bookingpage', views.bookingpage, name='bookingpage'),
     path('booking', views.booking, name='booking'),
     path('booking-submit', views.bookingSubmit, name='bookingSubmit'),
+    path('register', views.register, name='register'),
+    path('staffPanel', views.staffPanel, name='staffPanel'),
+    path('userPanel', views.userPanel, name='userPanel'),
 ]

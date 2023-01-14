@@ -5,29 +5,38 @@ from django.contrib import messages
 from django.urls import path
 from . import views
 
+
 def index(request):
-    return render(request, "index.html",{})
+    return render(request, "index.html", {})
+
 
 def about(request):
-    return render(request, "about.html",{})
+    return render(request, "about.html", {})
+
 
 def contact(request):
-    return render(request, "contact.html",{})
+    return render(request, "contact.html", {})
+
 
 def menu(request):
-    return render(request, "menu.html",{})
+    return render(request, "menu.html", {})
+
 
 def bookingpage(request):
-    return render(request, "bookingpage.html",{})
+    return render(request, "bookingpage.html", {})
+
+
+def register(request):
+    return render(request, "register.html", {})
+
 
 def booking(request):
-    #Calling 'validWeekday' Function to Loop days you want in the next 21 days:
+    # Calling 'validWeekday' Function to Loop days you want in the next 21 days:
     weekdays = validWeekday(22)
 
-    #Only show the days that are not full:
+    # Only show the days that are not full:
     validateWeekdays = isWeekdayValid(weekdays)
     
-
     if request.method == 'POST':
         service = request.POST.get('service')
         day = request.POST.get('day')
@@ -35,17 +44,17 @@ def booking(request):
             messages.success(request, "Please Select A Service!")
             return redirect('booking')
 
-        #Store day and service in django session:
+        # Store day and service in django session:
         request.session['day'] = day
         request.session['service'] = service
 
         return redirect('bookingSubmit')
 
-
     return render(request, 'booking.html', {
-            'weekdays':weekdays,
-            'validateWeekdays':validateWeekdays,
+            'weekdays': weekdays,
+            'validateWeekdays': validateWeekdays,
         })
+
 
 def bookingSubmit(request):
     user = request.user
@@ -58,11 +67,11 @@ def bookingSubmit(request):
     strdeltatime = deltatime.strftime('%Y-%m-%d')
     maxDate = strdeltatime
 
-    #Get stored data from django session:
+    # Get stored data from django session:
     day = request.session.get('day')
     service = request.session.get('service')
     
-    #Only show the time of the day that has not been selected before:
+    # Only show the time of the day that has not been selected before:
     hour = checkTime(times, day)
     if request.method == 'POST':
         time = request.POST.get("time")
@@ -74,10 +83,10 @@ def bookingSubmit(request):
                     if Appointment.objects.filter(day=day).count() < 11:
                         if Appointment.objects.filter(day=day, time=time).count() < 1:
                             AppointmentForm = Appointment.objects.get_or_create(
-                                user = user,
-                                service = service,
-                                day = day,
-                                time = time,
+                                user=user,
+                                service=service,
+                                day=day,
+                                time=time,
                             )
                             messages.success(request, "Booking Saved!")
                             return redirect('index')
@@ -88,36 +97,37 @@ def bookingSubmit(request):
                 else:
                     messages.success(request, "The Selected Date Is Incorrect")
             else:
-                    messages.success(request, "The Selected Date Isn't In The Correct Time Period!")
+                messages.success(request, "The Selected Date Isn't In The Correct Time Period!")
         else:
             messages.success(request, "Please Select A Service!")
 
-
     return render(request, 'bookingSubmit.html', {
-        'times':hour,
+        'times': hour,
     })
+
 
 def userPanel(request):
     user = request.user
     appointments = Appointment.objects.filter(user=user).order_by('day', 'time')
     return render(request, 'userPanel.html', {
-        'user':user,
-        'appointments':appointments,
+        'user': user,
+        'appointments': appointments,
     })
+
 
 def userUpdate(request, id):
     appointment = Appointment.objects.get(pk=id)
     userdatepicked = appointment.day
-    #Copy  booking:
+    # Copy  booking:
     today = datetime.today()
     minDate = today.strftime('%Y-%m-%d')
 
-    #24h if statement in template:
+    # 24h if statement in template:
     delta24 = (userdatepicked).strftime('%Y-%m-%d') >= (today + timedelta(days=1)).strftime('%Y-%m-%d')
-    #Calling 'validWeekday' Function to Loop days you want in the next 21 days:
+    # Calling 'validWeekday' Function to Loop days you want in the next 21 days:
     weekdays = validWeekday(22)
 
-    #Only show the days that are not full:
+    # Only show the days that are not full:
     validateWeekdays = isWeekdayValid(weekdays)
     
 
@@ -125,7 +135,7 @@ def userUpdate(request, id):
         service = request.POST.get('service')
         day = request.POST.get('day')
 
-        #Store day and service in django session:
+        # Store day and service in django session:
         request.session['day'] = day
         request.session['service'] = service
 
