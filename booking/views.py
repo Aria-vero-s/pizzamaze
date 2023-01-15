@@ -26,6 +26,34 @@ def register(request):
     return render(request, "register.html", {})
 
 
+def get_author(user):
+    if user.is_anonymous:
+        guest_user = User.objects.get(username="guest") # or whatever ID or name you use for the placeholder user that no one will be assigned
+        qs = Author.objects.filter(user=guest_user)
+        if qs.exists():
+            return qs[0]
+        return None
+    else:
+        qs = Author.objects.filter(user=user)
+        if qs.exists():
+            return qs[0]
+        return None
+
+
+
+def new_record(request):
+    form = OrderForm(request.POST or None, request.FILES or None)
+    if form.is_valid():
+        author = get_author(request.user)
+        form.instance.login_user = author
+        form.save()
+        return redirect(all_records)
+
+    context = {
+        'form': form
+    }
+    return render(request, 'orders/form.html', context)
+
 def booking(request):
     # Calling 'validWeekday' Function to Loop days you want in the next 21 days:
     weekdays = validWeekday(22)
