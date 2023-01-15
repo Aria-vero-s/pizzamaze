@@ -11,6 +11,23 @@ h1 {
   color: #EF8354;
 }
 
+h2 {
+  margin-left: 40px;
+}
+
+.navbar {
+  padding-left: 40px;
+}
+
+.navbar-brand {
+  color: #EF8354;
+  text-transform: uppercase;
+  font-size: 40px;
+  margin-left: 40px;
+  padding-top: 20px;
+  margin-bottom: -20px;
+}
+
 ul {
     list-style-type: none;
     margin: 0;
