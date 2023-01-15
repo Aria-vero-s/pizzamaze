@@ -22,10 +22,6 @@ def menu(request):
     return render(request, "menu.html", {})
 
 
-def bookingpage(request):
-    return render(request, "bookingpage.html", {})
-
-
 def register(request):
     return render(request, "register.html", {})
 

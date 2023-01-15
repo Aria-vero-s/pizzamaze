@@ -2,10 +2,12 @@
 {% load static %}
 {% block body %}
 
+<div class="container-fluid" style="padding: 40px;">
+    <h2>Contact us</h2>
 <section class="form-section">
-        
+    <div class="shadow p-4 mb-5 bg-body bg-body rounded text-black m-5">
+        <p>Please enter the following:</p>
     <form method="GET" action="feedback.html" class="signup-form">
-        
         <label for="fname">First Name</label>
         <input id="fname" class="text-input" name="first_name" type="text" required>
         
@@ -15,12 +17,14 @@
         <label for="email">Email Address</label>
         <input type="email" class="text-input" id="email" name="email_address" required>
         
-        <label for="comment">Leave a comment</label>
+        <label for="comment">Leave a message</label>
         <textarea id="comment" class="text-input" name="comment" type="text" style="height:100px; text-align: start;"></textarea>
         
         <input class="submit-button" type="submit" value="submit">
     </form>
+    </div>
 </section>
+</div>
 
 {% endblock %}
 
