@@ -1,6 +1,6 @@
 from django.urls import path 
 from . import views
-from booking.views import index, about, contact, menu, booking, bookingSubmit, register, staffPanel, userPanel, userUpdate, userUpdateSubmit
+from booking.views import index, about, contact, menu, booking, bookingSubmit, register, staffPanel, userPanel, userUpdate, userUpdateSubmit, bookingSubmitInfo
 
 urlpatterns = [
     path('', views.index, name='index'),
@@ -14,4 +14,5 @@ urlpatterns = [
     path('userPanel', views.userPanel, name='userPanel'),
     path('userUpdate', views.userUpdate, name='userUpdate'),
     path('userUpdateSubmit', views.userUpdateSubmit, name='userUpdateSubmit'),
+    path('bookingSubmitInfo', views.bookingSubmitInfo, name='bookingSubmitInfo'),
 ]

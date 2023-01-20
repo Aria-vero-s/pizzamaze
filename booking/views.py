@@ -129,6 +129,21 @@ def bookingSubmit(request):
         'times': hour,
     })
 
+def bookingSubmitInfo(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        if name == None:
+            messages.success(request, "Please write your name!")
+            return redirect('bookingSubmitInfo')
+
+        # Store day and service in django session:
+        request.session['name'] = name
+
+        return redirect('index')
+
+    return render(request, 'bookingSubmitInfo.html', {
+            'name': name,
+        })
 
 def userPanel(request):
     user = request.user
