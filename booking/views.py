@@ -26,19 +26,18 @@ def register(request):
     return render(request, "register.html", {})
 
 
-def get_author(user):
-    if user.is_anonymous:
-        guest_user = User.objects.get(username="guest") # or whatever ID or name you use for the placeholder user that no one will be assigned
-        qs = Author.objects.filter(user=guest_user)
-        if qs.exists():
-            return qs[0]
-        return None
-    else:
-        qs = Author.objects.filter(user=user)
-        if qs.exists():
-            return qs[0]
-        return None
-
+# def get_author(user):
+#     if user.is_anonymous:
+#         guest_user = User.objects.get(username="guest") # or whatever ID or name you use for the placeholder user that no one will be assigned
+#         qs = Author.objects.filter(user=guest_user)
+#         if qs.exists():
+#             return qs[0]
+#         return None
+#     else:
+#         qs = Author.objects.filter(user=user)
+#         if qs.exists():
+#             return qs[0]
+#         return None
 
 
 def new_record(request):
@@ -70,7 +69,7 @@ def booking(request):
 
         # Store day and service in django session:
         request.session['day'] = day
-        request.session['service'] = service
+        request.session['name'] = name
 
         return redirect('bookingSubmit')
 
@@ -93,7 +92,7 @@ def bookingSubmit(request):
 
     # Get stored data from django session:
     day = request.session.get('day')
-    service = request.session.get('service')
+    name = request.session.get('name')
     
     # Only show the time of the day that has not been selected before:
     hour = checkTime(times, day)
@@ -108,7 +107,7 @@ def bookingSubmit(request):
                         if Appointment.objects.filter(day=day, time=time).count() < 1:
                             AppointmentForm = Appointment.objects.get_or_create(
                                 user=user,
-                                service=service,
+                                guest=guest,
                                 day=day,
                                 time=time,
                             )
@@ -123,27 +122,11 @@ def bookingSubmit(request):
             else:
                 messages.success(request, "The Selected Date Isn't In The Correct Time Period!")
         else:
-            messages.success(request, "Please Select A Service!")
+            messages.success(request, "Please select the amounts of guests!")
 
     return render(request, 'bookingSubmit.html', {
         'times': hour,
     })
-
-def bookingSubmitInfo(request):
-    if request.method == 'POST':
-        name = request.POST.get('name')
-        if name == None:
-            messages.success(request, "Please write your name!")
-            return redirect('bookingSubmitInfo')
-
-        # Store day and service in django session:
-        request.session['name'] = name
-
-        return redirect('index')
-
-    return render(request, 'bookingSubmitInfo.html', {
-            'name': name,
-        })
 
 def userPanel(request):
     user = request.user
@@ -174,7 +157,7 @@ def userUpdate(request, id):
         service = request.POST.get('service')
         day = request.POST.get('day')
 
-        # Store day and service in django session:
+        #Store day and service in django session:
         request.session['day'] = day
         request.session['service'] = service
 
@@ -232,7 +215,7 @@ def userUpdateSubmit(request, id):
             else:
                     messages.success(request, "The Selected Date Isn't In The Correct Time Period!")
         else:
-            messages.success(request, "Please Select A Service!")
+            messages.success(request, "Your booking is saved!")
         return redirect('userPanel')
 
 
