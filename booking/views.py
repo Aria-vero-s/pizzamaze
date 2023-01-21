@@ -39,6 +39,21 @@ def register(request):
 #             return qs[0]
 #         return None
 
+def First_name(request):
+    if request.method == "POST":
+        First_name = request.POST["First_name"]
+
+def Last_name(request):
+    if request.method == "POST":
+        Last_name = request.POST["Last_name"]
+
+def Email(request):
+    if request.method == "POST":
+        Email = request.POST["Email"]
+
+def Phone(request):
+    if request.method == "POST":
+        Phone = request.POST["Phone"]
 
 def new_record(request):
     form = OrderForm(request.POST or None, request.FILES or None)
@@ -61,15 +76,23 @@ def booking(request):
     validateWeekdays = isWeekdayValid(weekdays)
     
     if request.method == 'POST':
-        service = request.POST.get('service')
+        guests = request.POST.get('guests')
         day = request.POST.get('day')
-        if service == None:
-            messages.success(request, "Please Select A Service!")
+        First_name = request.POST.get('First_name')
+        Last_name = request.POST.get('Last_name')
+        Email = request.POST.get('Email')
+        Phone = request.POST.get('Phone')
+        if guests == None:
+            messages.success(request, "Please Select Guests!")
             return redirect('booking')
 
         # Store day and service in django session:
         request.session['day'] = day
-        request.session['name'] = name
+        request.session['guests'] = guests
+        request.session['First_name'] = First_name
+        request.session['Last_name'] = Last_name
+        request.session['Email'] = Email
+        request.session['Phone'] = Phone
 
         return redirect('bookingSubmit')
 
@@ -82,7 +105,7 @@ def booking(request):
 def bookingSubmit(request):
     user = request.user
     times = [
-        "3 PM", "3:30 PM", "4 PM", "4:30 PM", "5 PM", "5:30 PM", "6 PM", "6:30 PM", "7 PM", "7:30 PM"
+        "9 AM", "10 AM", "11 AM", "12 PM", "3 PM", "4 PM", "5 PM", "6 PM", "7 PM", "8 PM", "9 PM"
     ]
     today = datetime.now()
     minDate = today.strftime('%Y-%m-%d')
@@ -92,7 +115,11 @@ def bookingSubmit(request):
 
     # Get stored data from django session:
     day = request.session.get('day')
-    name = request.session.get('name')
+    guests = request.session.get('guests')
+    First_name = request.session.get('First_name')
+    Last_name = request.session.get('Last_name')
+    Email = request.session.get('Email')
+    Phone = request.session.get('Phone')
     
     # Only show the time of the day that has not been selected before:
     hour = checkTime(times, day)
@@ -100,14 +127,18 @@ def bookingSubmit(request):
         time = request.POST.get("time")
         date = dayToWeekday(day)
 
-        if service != None:
+        if guests != None:
             if day <= maxDate and day >= minDate:
                 if date == 'Monday' or date == 'Saturday' or date == 'Wednesday':
                     if Appointment.objects.filter(day=day).count() < 11:
                         if Appointment.objects.filter(day=day, time=time).count() < 1:
                             AppointmentForm = Appointment.objects.get_or_create(
                                 user=user,
-                                guest=guest,
+                                guests=guests,
+                                First_name=First_name,
+                                Last_name=Last_name,
+                                Email=Email,
+                                Phone=Phone,
                                 day=day,
                                 time=time,
                             )
@@ -123,16 +154,20 @@ def bookingSubmit(request):
                 messages.success(request, "The Selected Date Isn't In The Correct Time Period!")
         else:
             messages.success(request, "Please select the amounts of guests!")
-
     return render(request, 'bookingSubmit.html', {
         'times': hour,
     })
 
+
 def userPanel(request):
     user = request.user
-    appointments = Appointment.objects.filter(user=user).order_by('day', 'time')
+    appointments = Appointment.objects.filter(user=user).order_by('day', 'time', 'First_name', 'Last_name', 'Email', 'Phone')
     return render(request, 'userPanel.html', {
         'user': user,
+        'First_name' : First_name,
+        'Last_name' : Last_name,
+        'Email' : Email,
+        'Phone' : Phone,
         'appointments': appointments,
     })
 
@@ -154,12 +189,20 @@ def userUpdate(request, id):
     
 
     if request.method == 'POST':
-        service = request.POST.get('service')
+        guests = request.POST.get('guests')
         day = request.POST.get('day')
+        First_name = request.POST.get('First_name')
+        Last_name = request.POST.get('Last_name')
+        Email = request.POST.get('Email')
+        Phone = request.POST.get('Phone')
 
         #Store day and service in django session:
         request.session['day'] = day
-        request.session['service'] = service
+        request.session['guests'] = guests
+        request.session['First_name'] = First_name
+        request.session['Last_name'] = Last_name
+        request.session['Email'] = Email
+        request.session['Phone'] = Phone
 
         return redirect('userUpdateSubmit', id=id)
 
@@ -174,7 +217,7 @@ def userUpdate(request, id):
 def userUpdateSubmit(request, id):
     user = request.user
     times = [
-        "3 PM", "3:30 PM", "4 PM", "4:30 PM", "5 PM", "5:30 PM", "6 PM", "6:30 PM", "7 PM", "7:30 PM"
+        "9 AM", "10 AM", "11 AM", "12 PM", "3 PM", "4 PM", "5 PM", "6 PM", "7 PM", "8 PM", "9 PM"
     ]
     today = datetime.now()
     minDate = today.strftime('%Y-%m-%d')
@@ -183,7 +226,11 @@ def userUpdateSubmit(request, id):
     maxDate = strdeltatime
 
     day = request.session.get('day')
-    service = request.session.get('service')
+    guests = request.session.get('guests')
+    First_name = request.session.get('First_name')
+    Last_name = request.session.get('Last_name')
+    Email = request.session.get('Email')
+    Phone = request.session.get('Phone')
     
     #Only show the time of the day that has not been selected before and the time he is editing:
     hour = checkEditTime(times, day, id)
@@ -193,14 +240,18 @@ def userUpdateSubmit(request, id):
         time = request.POST.get("time")
         date = dayToWeekday(day)
 
-        if service != None:
+        if guests != None:
             if day <= maxDate and day >= minDate:
                 if date == 'Monday' or date == 'Saturday' or date == 'Wednesday':
                     if Appointment.objects.filter(day=day).count() < 11:
                         if Appointment.objects.filter(day=day, time=time).count() < 1 or userSelectedTime == time:
                             AppointmentForm = Appointment.objects.filter(pk=id).update(
                                 user = user,
-                                service = service,
+                                guests = guests,
+                                First_name=First_name,
+                                Last_name=Last_name,
+                                Email=Email,
+                                Phone=Phone,
                                 day = day,
                                 time = time,
                             ) 

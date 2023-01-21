@@ -1,4 +1,4 @@
-from django.urls import path 
+from django.urls import path, include
 from . import views
 from booking.views import index, about, contact, menu, booking, bookingSubmit, register, userPanel, userUpdate, userUpdateSubmit
 
@@ -10,7 +10,7 @@ urlpatterns = [
     path('booking', views.booking, name='booking'),
     path('booking-submit', views.bookingSubmit, name='bookingSubmit'),
     path('register', views.register, name='register'),
-    path('userPanel', views.userPanel, name='userPanel'),
-    path('userUpdate', views.userUpdate, name='userUpdate'),
-    path('userUpdateSubmit', views.userUpdateSubmit, name='userUpdateSubmit'),
+    path('user-panel', views.userPanel, name='userPanel'),
+    path('user-update/<int:id>', views.userUpdate, name='userUpdate'),
+    path('user-update-submit/<int:id>', views.userUpdateSubmit, name='userUpdateSubmit'),
 ]

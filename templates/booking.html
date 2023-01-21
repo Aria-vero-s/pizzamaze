@@ -12,7 +12,7 @@
         <!--input guests-->
         <div>
             <h3 class="">Select guests:</h3>
-            <select class="form-select fs-3" name="service">
+            <select class="form-select fs-3" name="guests">
                 <option value="1 guest">1 guest</option>
                 <option value="2 guests">2 guests</option>
                 <option value="3 guests">3 guests</option>
@@ -21,8 +21,6 @@
                 <option value="6 guests">6 guests</option>
                 <option value="7 guests">7 guests</option>
                 <option value="8 guests">8 guests</option>
-                <option value="9 guests">9 guests</option>
-                <option value="10 guests">10 guests</option>
             </select>
         </div>
             <!--input day-->
@@ -33,6 +31,26 @@
                     <option value="{{validateWeekday}}">{{validateWeekday}}</option>
                     {% endfor %}
                 </select>
+            </div>
+
+            <div class="mt-3">
+                <h3 class="">First name:</h3>
+                    <input id="First_name" type="text" name="First_name" value="{{ First_name }}">
+            </div>
+
+            <div class="mt-3">
+                <h3 class="">Last name:</h3>
+                    <input id="Last_name" type="text" name="Last_name" value="{{ Last_name }}">
+            </div>
+
+            <div class="mt-3">
+                <h3 class="">Email:</h3>
+                    <input id="Email" type="text" name="Email" value="{{ Email }}">
+            </div>
+
+            <div class="mt-3">
+                <h3 class="">Phone number:</h3>
+                    <input id="Phone" type="text" name="Phone" value="{{ Phone }}">
             </div>
 
             <br/>
