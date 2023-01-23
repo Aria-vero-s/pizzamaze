@@ -1,3 +1,5 @@
 from django.contrib import admin
 from .models import *
-admin.site.register(Appointment)
+from .models import Table
+admin.site.register(Table)
+

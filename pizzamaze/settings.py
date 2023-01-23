@@ -32,7 +32,7 @@ DEBUG = True
 ALLOWED_HOSTS = ['pizzamaze.herokuapp.com', 'localhost']
 
 LOGIN_REDIRECT_URL = 'home'
-LOGOUT_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'index'
 
 # Application definition
 
@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'booking',
     'cloudinary',
+    'pizzamaze',
 ]
 
 MIDDLEWARE = [
@@ -94,6 +95,8 @@ WSGI_APPLICATION = 'pizzamaze.wsgi.application'
 DATABASES = {
     'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
 }
+
+
 
 
 # Password validation

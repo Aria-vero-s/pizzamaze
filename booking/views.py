@@ -76,8 +76,8 @@ def booking(request):
     validateWeekdays = isWeekdayValid(weekdays)
     
     if request.method == 'POST':
-        guests = request.POST.get('guests')
         day = request.POST.get('day')
+        guests = request.POST.get('guests')
         First_name = request.POST.get('First_name')
         Last_name = request.POST.get('Last_name')
         Email = request.POST.get('Email')
@@ -103,7 +103,6 @@ def booking(request):
 
 
 def bookingSubmit(request):
-    user = request.user
     times = [
         "9 AM", "10 AM", "11 AM", "12 PM", "3 PM", "4 PM", "5 PM", "6 PM", "7 PM", "8 PM", "9 PM"
     ]
@@ -127,13 +126,12 @@ def bookingSubmit(request):
         time = request.POST.get("time")
         date = dayToWeekday(day)
 
-        if guests != None:
+        if GUESTS != None:
             if day <= maxDate and day >= minDate:
                 if date == 'Monday' or date == 'Saturday' or date == 'Wednesday':
-                    if Appointment.objects.filter(day=day).count() < 11:
-                        if Appointment.objects.filter(day=day, time=time).count() < 1:
-                            AppointmentForm = Appointment.objects.get_or_create(
-                                user=user,
+                    if Table.objects.filter(day=day).count() < 11:
+                        if Table.objects.filter(day=day, time=time).count() < 1:
+                            TableForm = Table.objects.get_or_create(
                                 guests=guests,
                                 First_name=First_name,
                                 Last_name=Last_name,
@@ -161,20 +159,21 @@ def bookingSubmit(request):
 
 def userPanel(request):
     user = request.user
-    appointments = Appointment.objects.filter(user=user).order_by('day', 'time', 'First_name', 'Last_name', 'Email', 'Phone')
+    tables = Table.objects.filter(user=user).order_by('day', 'time', 'First_name', 'Last_name', 'Email', 'Phone')
     return render(request, 'userPanel.html', {
         'user': user,
+        'guests' : guests,
         'First_name' : First_name,
         'Last_name' : Last_name,
         'Email' : Email,
         'Phone' : Phone,
-        'appointments': appointments,
+        'tables': tables,
     })
 
 
 def userUpdate(request, id):
-    appointment = Appointment.objects.get(pk=id)
-    userdatepicked = appointment.day
+    table = Table.objects.get(pk=id)
+    userdatepicked = table.day
     # Copy  booking:
     today = datetime.today()
     minDate = today.strftime('%Y-%m-%d')
@@ -234,8 +233,8 @@ def userUpdateSubmit(request, id):
     
     #Only show the time of the day that has not been selected before and the time he is editing:
     hour = checkEditTime(times, day, id)
-    appointment = Appointment.objects.get(pk=id)
-    userSelectedTime = appointment.time
+    table = Table.objects.get(pk=id)
+    userSelectedTime = table.time
     if request.method == 'POST':
         time = request.POST.get("time")
         date = dayToWeekday(day)
@@ -243,9 +242,9 @@ def userUpdateSubmit(request, id):
         if guests != None:
             if day <= maxDate and day >= minDate:
                 if date == 'Monday' or date == 'Saturday' or date == 'Wednesday':
-                    if Appointment.objects.filter(day=day).count() < 11:
-                        if Appointment.objects.filter(day=day, time=time).count() < 1 or userSelectedTime == time:
-                            AppointmentForm = Appointment.objects.filter(pk=id).update(
+                    if Table.objects.filter(day=day).count() < 11:
+                        if Table.objects.filter(day=day, time=time).count() < 1 or userSelectedTime == time:
+                            TableForm = Table.objects.filter(pk=id).update(
                                 user = user,
                                 guests = guests,
                                 First_name=First_name,
@@ -255,7 +254,7 @@ def userUpdateSubmit(request, id):
                                 day = day,
                                 time = time,
                             ) 
-                            messages.success(request, "Appointment Edited!")
+                            messages.success(request, "Booking Edited!")
                             return redirect('index')
                         else:
                             messages.success(request, "The Selected Time Has Been Reserved Before!")
@@ -281,8 +280,8 @@ def staffPanel(request):
     deltatime = today + timedelta(days=21)
     strdeltatime = deltatime.strftime('%Y-%m-%d')
     maxDate = strdeltatime
-    #Only show the Appointments 21 days from today
-    items = Appointment.objects.filter(day__range=[minDate, maxDate]).order_by('day', 'time')
+    #Only show the tables 21 days from today
+    items = Table.objects.filter(day__range=[minDate, maxDate]).order_by('day', 'time')
 
     return render(request, 'staffPanel.html', {
         'items':items,
@@ -307,7 +306,7 @@ def validWeekday(days):
 def isWeekdayValid(x):
     validateWeekdays = []
     for j in x:
-        if Appointment.objects.filter(day=j).count() < 10:
+        if Table.objects.filter(day=j).count() < 10:
             validateWeekdays.append(j)
     return validateWeekdays
 
@@ -315,17 +314,17 @@ def checkTime(times, day):
     #Only show the time of the day that has not been selected before:
     x = []
     for k in times:
-        if Appointment.objects.filter(day=day, time=k).count() < 1:
+        if Table.objects.filter(day=day, time=k).count() < 1:
             x.append(k)
     return x
 
 def checkEditTime(times, day, id):
     #Only show the time of the day that has not been selected before:
     x = []
-    appointment = Appointment.objects.get(pk=id)
-    time = appointment.time
+    table = Table.objects.get(pk=id)
+    time = table.time
     for k in times:
-        if Appointment.objects.filter(day=day, time=k).count() < 1 or time == k:
+        if Table.objects.filter(day=day, time=k).count() < 1 or time == k:
             x.append(k)
     return x
 # Create your views here.

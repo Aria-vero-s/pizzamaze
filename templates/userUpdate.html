@@ -1,4 +1,4 @@
-<title>Edit Appointment</title>
+<title>Edit Table</title>
 {% extends 'layout.html' %}
 {% load static %}
 {% block body %}
@@ -9,7 +9,7 @@
 {% if user.is_authenticated %}
 <!--if 24hrs before nobat-->
 {% if delta24 == True %}
-<h1 class="text-center  mt-3">Edit Appointment</h1>
+<h1 class="text-center  mt-3">Edit Table</h1>
 
 <div class="shadow p-4 mb-5 bg-body bg-body rounded text-black  m-5 ">
     <form method="post" action="{% url 'userUpdate' id %}" class="me-2 ms-2" required>
@@ -44,7 +44,7 @@
 {% else %}
 
 <div class="shadow p-4 mb-5 bg-body bg-body rounded text-black m-5 text-center fPersian">
-    <h1 class="text-danger">Editing Appointments Its Only Available 24hrs Before Appointment!</h1>
+    <h1 class="text-danger">Editing Tables Its Only Available 24hrs Before Table!</h1>
     <a href="{% url 'userPanel' %}" class="btn btn-primary mt-5">Return To User Panel</a>
 </div>
 

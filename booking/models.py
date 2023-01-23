@@ -1,4 +1,5 @@
 from django.db import models
+from django import forms
 from django.contrib.auth.models import User
 from cloudinary.models import CloudinaryField
 from datetime import datetime
@@ -29,9 +30,10 @@ TIME_CHOICES = (
     ("9 PM", "9 PM"),
 )
 
-class Appointment(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
-    guests = models.CharField(max_length=50, choices=GUESTS)
+# To book a table, needs these informations from customers:
+
+class Table(models.Model):
+    guests = models.CharField(max_length=50, choices=GUESTS, default="1 guest")
     First_name = models.CharField(max_length=20, help_text='First name')
     Last_name = models.CharField(max_length=20, help_text='Last name')
     Email = models.EmailField(max_length=20, help_text='Email')
@@ -40,4 +42,12 @@ class Appointment(models.Model):
     time = models.CharField(max_length=10, choices=TIME_CHOICES, default="3 PM")
     time_ordered = models.DateTimeField(default=datetime.now, blank=True)
     def __str__(self):
-        return f"{self.user.username} | day: {self.day} | time: {self.time} | First_name: {self.First_name}| Last_name: {self.Last_name}| Email: {self.Email}| Phone: {self.Phone}"
+        return f"day: {self.day} | time: {self.time}"
+
+# guests: {self.guests} | First_name: {self.First_name}| Last_name: {self.Last_name}| Email: {self.Email}| Phone: {self.Phone}
+
+# class Form(forms.Form):
+#     First_name = forms.CharField(max_length=20, help_text='First name')
+#     Last_name = forms.CharField(max_length=20, help_text='Last name')
+#     Email = forms.EmailField(max_length=20, help_text='Email')
+#     Phone = forms.CharField(max_length=20, help_text='Phone')
