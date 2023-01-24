@@ -18,26 +18,13 @@ def contact(request):
     return render(request, "contact.html", {})
 
 
+def feedback(request):
+    return render(request, "feedback.html", {})
+
+
 def menu(request):
     return render(request, "menu.html", {})
 
-
-def register(request):
-    return render(request, "register.html", {})
-
-
-# def get_author(user):
-#     if user.is_anonymous:
-#         guest_user = User.objects.get(username="guest") # or whatever ID or name you use for the placeholder user that no one will be assigned
-#         qs = Author.objects.filter(user=guest_user)
-#         if qs.exists():
-#             return qs[0]
-#         return None
-#     else:
-#         qs = Author.objects.filter(user=user)
-#         if qs.exists():
-#             return qs[0]
-#         return None
 
 def First_name(request):
     if request.method == "POST":
@@ -154,20 +141,6 @@ def bookingSubmit(request):
             messages.success(request, "Please select the amounts of guests!")
     return render(request, 'bookingSubmit.html', {
         'times': hour,
-    })
-
-
-def userPanel(request):
-    user = request.user
-    tables = Table.objects.filter(user=user).order_by('day', 'time', 'First_name', 'Last_name', 'Email', 'Phone')
-    return render(request, 'userPanel.html', {
-        'user': user,
-        'guests' : guests,
-        'First_name' : First_name,
-        'Last_name' : Last_name,
-        'Email' : Email,
-        'Phone' : Phone,
-        'tables': tables,
     })
 
 

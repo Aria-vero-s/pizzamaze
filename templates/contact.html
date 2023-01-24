@@ -7,7 +7,7 @@
 <section class="form-section">
     <div class="shadow p-4 mb-5 bg-body bg-body rounded text-black m-5">
         <p>Please enter the following:</p>
-    <form method="GET" action="feedback.html" class="signup-form">
+    <form method="GET" action="{% url 'feedback' %}" class="signup-form">
         <label for="fname">First Name</label>
         <input id="fname" class="text-input" name="first_name" type="text" required>
         

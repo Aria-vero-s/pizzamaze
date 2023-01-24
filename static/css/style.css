@@ -2,9 +2,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200&display=swap');
 
 body{
-    background-color: #EEF0F2;
-    color: #5C6452;
-    font-family: 'Montserrat', sans-serif;
+  background-color: #EEF0F2;
+  color: #5C6452;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .navbar {
@@ -25,17 +25,21 @@ link:active {
   color: #6D6875;
 }
 
+.menu {
+  background-image: url("/workspace/pizzamaze/static/doodad.png");
+  background-repeat: repeat;
+}
 
 ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #6D6875;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #6D6875;
   }
   
-  li {
-    float: left;
+li {
+  float: left;
   }
 
 li a {
@@ -56,48 +60,6 @@ li a:hover {
   padding-top: 20px;
   color: #EF8354;
 }
-
-.restaurant-title {
-  margin-left: 40px;
-  padding-top: 20px;
-  color: #EF8354;
-}
-
-  /* ethos */
-
-  .ethos {
-    font-size: 50px;
-    color:#fff;
-    position: absolute;
-    width:40%;
-    line-height: 60%;
-    top: 30%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-
-  /* about */
-
-.about {
-    font-size: xx-large;
-    color:#fff;
-    position: absolute;
-    top: 50%;
-    left: 75%;
-    transform: translate(-50%, -70%);
-  }
-
-  /* menu */
-
-  .menu {
-    font-size: xx-large;
-    color:#000;
-    position: absolute;
-    background-image: url(../assets/images/bruschetta.avif);
-    width:100%;
-    background-repeat: no-repeat;
-    background-size: cover;
-  }
 
 /* Form */
 
