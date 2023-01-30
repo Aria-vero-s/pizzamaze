@@ -9,6 +9,7 @@ body{
 
 .navbar {
   padding-left: 40px;
+  background-color: #6D6875;
 }
 
 .navbar-brand {
@@ -104,7 +105,7 @@ li a:hover {
 }
 
 .submit-button:hover{
-  background-color: #a7c283;
+  background-color: #EF8354;
   color: #fafafa;
 }
 
@@ -119,4 +120,8 @@ li a:hover {
 
 .footer {
   background-color: #6D6875;
+}
+
+a {
+  color: white;
 }
