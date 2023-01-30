@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200&display=swap');
 
 body{
-  background-color: #EEF0F2;
+  background-color: #eef0f2;
   color: #5C6452;
   font-family: 'Montserrat', sans-serif;
 }
@@ -12,7 +12,7 @@ body{
 }
 
 .navbar-brand {
-  color: #EF8354;
+  color: #ef8354;
   text-transform: uppercase;
   font-size: 40px;
   margin-left: 40px;
