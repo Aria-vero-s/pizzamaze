@@ -5,6 +5,19 @@ from django.contrib import messages
 from django.urls import path
 from . import views
 
+# From https://pypi.org/project/django-bootstrap-modal-forms/ :
+from django.urls import reverse_lazy
+from .forms import BookModelForm
+from .models import Book
+from bootstrap_modal_forms.generic import BSModalCreateView
+
+class BookCreateView(BSModalCreateView):
+    template_name = 'examples/create_book.html'
+    form_class = BookModelForm
+    success_message = 'Success: Book was created.'
+    success_url = reverse_lazy('index')
+# ^ From https://pypi.org/project/django-bootstrap-modal-forms/ ^
+
 
 def index(request):
     return render(request, "index.html", {})

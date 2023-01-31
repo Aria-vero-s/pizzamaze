@@ -15,6 +15,9 @@
     <link rel="stylesheet" href = "{% static 'css/style.css' %}">
     {% endblock %}
   </head>
+  <body>
+  <!-- from here: https://pypi.org/project/django-bootstrap-modal-forms/ -->
+  <script src="{% static 'js/jquery.bootstrap.modal.forms.min.js' %}"></script>
 
   {% block header %}
   <header>
@@ -52,8 +55,6 @@
   {% endfor %}
   {% endif %}
   <!--Messages End-->
-  
-  <body>
 
   {% block body %}
   {% endblock %}
