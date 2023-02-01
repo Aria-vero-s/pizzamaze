@@ -47,7 +47,6 @@ INSTALLED_APPS = [
     'cloudinary',
     'booking',
     'pizzamaze',
-    'bootstrap_modal_forms',
 ]
 
 MIDDLEWARE = [

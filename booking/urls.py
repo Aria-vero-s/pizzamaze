@@ -1,6 +1,7 @@
 from django.urls import path, include
 from . import views
 from booking.views import index, about, contact, feedback, menu, booking, bookingSubmit
+from booking import views
 
 urlpatterns = [
     path('', views.index, name='index'),
@@ -10,9 +11,4 @@ urlpatterns = [
     path('menu', views.menu, name='menu'),
     path('booking', views.booking, name='booking'),
     path('booking-submit', views.bookingSubmit, name='bookingSubmit'),
-# From: https://pypi.org/project/django-bootstrap-modal-forms/
-    path('create/', views.BookCreateView.as_view(), name='create_book'),
-# From: https://pypi.org/project/django-bootstrap-modal-forms/
-    # asyncSettings.dataUrl
-    path('booking/', views.books, name='books'),
 ]
