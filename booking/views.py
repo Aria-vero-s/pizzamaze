@@ -4,6 +4,22 @@ from .models import *
 from django.contrib import messages
 from django.urls import path
 from . import views
+from django.contrib.auth import authenticate, login, logout
+
+def login_user(request):
+    if request.method == "POST":
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('index')
+        else:
+            messages.success(request, "There was an error logging in, please try again")
+            return redirect('login')
+    else:
+        return render(request, 'authenticate')
+
 
 def index(request):
     return render(request, "index.html", {})
@@ -45,7 +61,7 @@ def new_record(request):
     form = OrderForm(request.POST or None, request.FILES or None)
     if form.is_valid():
         author = get_author(request.user)
-        form.instance.login_user = author
+        # form.instance.login_user = author
         form.save()
         return redirect(all_records)
 

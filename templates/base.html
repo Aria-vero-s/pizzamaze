@@ -24,6 +24,10 @@
             <div class="col-md-8">
                 <h2 style="margin-left: 40px;">Italian restaurant</h2>
             </div>
+              <a class="btn btn-light" href="{% url 'login' %}" role="button">Login</a>
+              <a class="btn btn-light" href="{% url 'login' %}" role="button">Logout</a>
+              <a class="btn btn-light" href="{% url 'admin:index' %}" role="button">Staff</a>
+            </li>
         </div>
 
     <nav class="navbar nav-color navbar-expand-lg navbar-dark">
@@ -45,18 +49,19 @@
   {% endblock %}
   <!--Messages Start-->
   {% if messages %}
-  {% for message in messages %}
-    <div class="alert alert-success  alert-dismissible fade show text-center " role="alert">
-      <h3 class="display-3">{{ message }}</h3>
-      <button type="button" class="btn-close fs-1 position-absolute top-50 start-0 translate-middle-y" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-  {% endfor %}
+    {% for message in messages %}
+      <div class="alert alert-success  alert-dismissible fade show text-center " role="alert">
+        {{ message }}
+        <button type="button" class="btn-close fs-1 position-absolute top-50 start-0 translate-middle-y" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    {% endfor %}
   {% endif %}
   <!--Messages End-->
 
   {% block body %}
   {% endblock %}
 
+  <!-- To understand how to create footers, I used: https://mdbootstrap.com/docs/standard/navigation/footer/ -->
   <footer class="bg-dark text-white">
     <div class="container-fluid pt-3">
       <div class="container text-md-start mt-5">
@@ -82,8 +87,11 @@
         </div>
       </div>
     </div>
-    <p class="m-0 text-center"><a href="{% url 'admin:index' %}">link to staff panel</a></p>
-    <p class="m-0 text-center">Made by <a href="https://github.com/Aria-vero-s">Aria-vero-s</a></p>
+  </footer>
+  <footer class="bg-dark text-white">
+    <div class="text-center p-3">
+      @ 2023 Made by: <a class="textGradient" href="https://github.com/Aria-vero-s">aria-vero-s</a>
+    </div>
   </footer>
   </body>
 </html>

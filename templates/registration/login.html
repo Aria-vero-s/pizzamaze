@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+
+<div class="container-fluid" style="padding: 40px;">
+    <h2>Sign in</h2>
+    <div class="shadow p-4 mb-5 bg-body bg-body rounded text-black text-center m-5">
+    <form action="" method=POST>
+      {% csrf_token %}
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Username</label>
+          <input type="text" class="form-control" name="username" aria-describedby="emailHelp">
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Password</label>
+          <input type="password" class="form-control" name="password">
+        </div>
+        <div>
+          <input type="submit" value="Submit" class="btn btn-secondary">
+          </br></br>
+          <label class="form-label fs-3 mt-5">Don't Have An Account?</label>
+          </br>
+          <a href="" class="btn btn-primary">Sign Up</a> 
+        </div>
+		</form>
+  </div>
+</div>
+
+{% endblock %}

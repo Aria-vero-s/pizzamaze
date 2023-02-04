@@ -31,7 +31,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['pizzamaze.herokuapp.com', 'localhost']
 
-LOGIN_REDIRECT_URL = 'home'
+LOGIN_REDIRECT_URL = 'index'
 LOGOUT_REDIRECT_URL = 'index'
 
 # Application definition
