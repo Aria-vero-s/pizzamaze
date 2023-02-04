@@ -20,6 +20,10 @@ def login_user(request):
     else:
         return render(request, 'authenticate')
 
+def logout_user(request):
+    logout(request)
+    messages.success(request, "You were logged out")
+    return redirect('login')
 
 def index(request):
     return render(request, "index.html", {})
