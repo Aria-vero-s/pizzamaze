@@ -5,6 +5,7 @@ from django.contrib import messages
 from django.urls import path
 from . import views
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.forms import UserCreationForm
 
 def login_user(request):
     if request.method == "POST":
