@@ -27,7 +27,8 @@
   <header>
     <a class="navbar-brand" href="{% url 'index' %}"><strong>Pizza</strong>maze</a>
       <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-10">
+          <a href="{% url 'booking' %}" class="btn btn-outline-secondary float-end" role="button" aria-pressed="true">Book now!</a>
             <h2 style="margin-left: 40px;">Italian restaurant</h2>
         </div>
       </div>
@@ -43,6 +44,8 @@
           <a class="nav-item nav-link" href="{% url 'menu' %}">Menu</a>
           <a class="nav-item nav-link" href="{% url 'booking' %}">Booking</a>
           <a class="nav-item nav-link" href="{% url 'contact' %}">Contact</a>
+        </div>
+        <div class="navbar-nav ms-auto">
           {% if user.is_authenticated %}
           <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
           <a class="nav-item nav-link" href="{% url 'admin:index' %}">Staff</a>
@@ -82,8 +85,8 @@
           <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
             <!-- Links -->
             <h5 class="text-uppercase fw-bold mb-4 textGradient" id="contact">Contact Us</h5>
-            <a href="tel: 12345678">Tel: 12345678</a>
-            <a href="{% url 'booking' %}">Online Booking</a>
+            <a href="tel: 12345678">Tel: 12345678</a></br>
+            <a href="{% url 'booking' %}">Online Booking</a></br>
           </div>
           <!-- Grid column -->
                 
@@ -91,9 +94,9 @@
           <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
             <!-- Links -->
             <h5 class="text-uppercase fw-bold mb-4 textGradient">Social Media</h5>
-            <a href="Twitter.com">Twitter</a>
-            <a href="Facebook.com">Facebook</a>
-            <a href="Instagram.com">Instagram</a>
+            <a href="Twitter.com">Twitter</a></br>
+            <a href="Facebook.com">Facebook</a></br>
+            <a href="Instagram.com">Instagram</a></br>
           </div>
         </div>
       </div>
