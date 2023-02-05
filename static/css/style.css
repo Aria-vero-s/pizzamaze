@@ -22,47 +22,6 @@ body{
   margin-bottom: -20px;
 }
 
-link:active {
-  text-decoration: none;
-  color: #6D6875;
-}
-
-.menu {
-  background-image: url("/workspace/pizzamaze/static/doodad.png");
-  background-repeat: repeat;
-}
-
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: #6D6875;
-  }
-  
-li {
-  float: left;
-  }
-
-li a {
-  display: block;
-  color: #EEF0F2;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  }
-  
-li a:hover {
-  background-color: #EEF0F2;
-  color: #5C6452;
-  }
-
-.restaurant-title {
-  margin-left: 40px;
-  padding-top: 20px;
-  color: #EF8354;
-}
-
 /* Form */
 
 .form-section {
@@ -149,6 +108,12 @@ li a:hover {
 }
 
 a {
-  color: white;
+  color: #cccccc;
   text-decoration: none;
+}
+
+.bg-dark a:hover {
+  color: white !important;
+  text-decoration: none;
+  transition: 0.3s;
 }
