@@ -30,13 +30,6 @@
         <div class="col-md-8">
             <h2 style="margin-left: 40px;">Italian restaurant</h2>
         </div>
-        {% if user.is_authenticated %}
-            <a class="btn btn-light" href="{% url 'logout' %}" role="button">Logout</a>
-            <a class="btn btn-light" href="{% url 'admin:index' %}" role="button">Staff</a>
-            {% else %}
-            <a class="btn btn-light" href="{% url 'login' %}" role="button">Login</a>
-            <a class="btn btn-light" href="{% url 'admin:index' %}" role="button">Staff</a>
-            {% endif %}
       </div>
 
     <nav class="navbar nav-color navbar-expand-lg navbar-dark">
@@ -45,21 +38,19 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-          <a class="nav-item nav-link active" href="{% url 'index' %}"">Home <span class="sr-only">(current)</span></a>
+          <a class="nav-item nav-link active" href="{% url 'index' %}">Home <span class="sr-only"></span></a>
           <a class="nav-item nav-link" href="{% url 'about' %}">About</a>
           <a class="nav-item nav-link" href="{% url 'menu' %}">Menu</a>
           <a class="nav-item nav-link" href="{% url 'booking' %}">Booking</a>
           <a class="nav-item nav-link" href="{% url 'contact' %}">Contact</a>
-            <a class="nav-item nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Register
-            </a>
-          <li class="nav-item dropdown">
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="{% url 'login' %}">login</a></li>
-              <li><a class="dropdown-item" href="{% url 'logout' %}">logout</a></li>
-              <li><a class="dropdown-item" href="{% url 'admin:index' %}">Staff login</a></li>
-            </ul>
-          </li>
+          {% if user.is_authenticated %}
+          <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
+          <a class="nav-item nav-link" href="{% url 'admin:index' %}">Staff</a>
+          {% else %}
+          <a class="nav-item nav-link" href="{% url 'register_user' %}">Signup</a>
+          <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
+          <a class="nav-item nav-link" href="{% url 'admin:index' %}">Staff</a>
+          {% endif %}
         </div>
       </div>
     </nav>

@@ -1,6 +1,6 @@
 from django.urls import path, include
 from . import views
-from booking.views import index, about, contact, feedback, menu, booking, bookingSubmit, login
+from booking.views import index, about, contact, feedback, menu, booking, bookingSubmit, login, register_user
 from booking import views
 
 urlpatterns = [
@@ -13,4 +13,5 @@ urlpatterns = [
     path('booking-submit', views.bookingSubmit, name='bookingSubmit'),
     path('login', views.login_user, name="login"),
     path('logout', views.logout_user, name="logout"),
+    path('register_user', views.register_user, name="register_user"),
 ]
