@@ -6,28 +6,13 @@ from django.urls import path
 from . import views
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
-from .forms import RegisterUserForm
+from .models import RegisterUserForm
 from .models import Table
 
 
-def list_venues(request):
-    venue_list = Table.objects.all()
-    return render(request, 'venue.html', {'venue_list': venue_list})
-
-
-def show_venue(request, venue_id):
-    venue = Table.objects.get(pk=venue_id)
-    return render(request, 'events/show_venue.html', {'venue': venue})
-
-
-def update_venue(request, venue_id):
-    venue = Table.objects.get(pk=venue_id)
-    form = VenueForm(request.POST or None, instance=venue)
-    if form.is_valid():
-        form.save()
-        return redirect('list-venues')
-
-    return render(request, 'events/update_venue.html', {'venue': venue, 'form': form})
+def all_tables(request):
+    table_list = Table.objects.all()
+    return render(request, 'tables.html', {'table_list': table_list})
 
 
 def login_user(request):
@@ -42,12 +27,14 @@ def login_user(request):
             messages.success(request, "There was an error logging in, please try again")
             return redirect('login')
     else:
-        return render(request, 'authenticate')
+        return render(request, 'login.html')
+
 
 def logout_user(request):
     logout(request)
     messages.success(request, "You were logged out")
     return redirect('login')
+
 
 def register_user(request):
     if request.method == "POST":
@@ -62,12 +49,8 @@ def register_user(request):
             return redirect('index')
     else:
         form = RegisterUserForm()
-    return render(request, 'registration/register_user.html', {
-        'form':form,
-})
+    return render(request, 'register_user.html', {'form': form, })
 
-def venue(request):
-    return render(request, "venue.html", {})
 
 def index(request):
     return render(request, "index.html", {})
