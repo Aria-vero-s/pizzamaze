@@ -7,7 +7,7 @@ from . import views
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from .forms import RegisterUserForm
-from .models import Table
+from .models import Booking
 
 
 # login / logout / user registration system
@@ -90,13 +90,8 @@ def Phone(request):
         Phone = request.POST["Phone"]
 
 
-# user = request.user('user') here somehow?
-# def user(request):
-#     user = request.user
-
-
 def all_tables(request):
-    table_list = Table.objects.all()
+    table_list = Booking.objects.all()
     return render(request, 'account.html', {'table_list': table_list})
 
 
@@ -115,9 +110,6 @@ def booking(request):
         Last_name = request.POST.get('Last_name')
         Email = request.POST.get('Email')
         Phone = request.POST.get('Phone')
-        if guests == None:
-            messages.success(request, "Please Select Guests!")
-            return redirect('booking')
 
         # Store day and service in django session:
         request.session['day'] = day
@@ -162,9 +154,9 @@ def bookingSubmit(request):
         if GUESTS != None:
             if day <= maxDate and day >= minDate:
                 if date == 'Monday' or date == 'Saturday' or date == 'Wednesday':
-                    if Table.objects.filter(day=day).count() < 11:
-                        if Table.objects.filter(day=day, time=time).count() < 1:
-                            TableForm = Table.objects.get_or_create(
+                    if Booking.objects.filter(day=day).count() < 11:
+                        if Booking.objects.filter(day=day, time=time).count() < 1:
+                            BookingForm = Booking.objects.get_or_create(
                                 guests=guests,
                                 First_name=First_name,
                                 Last_name=Last_name,
@@ -210,7 +202,7 @@ def validWeekday(days):
 def isWeekdayValid(x):
     validateWeekdays = []
     for j in x:
-        if Table.objects.filter(day=j).count() < 10:
+        if Booking.objects.filter(day=j).count() < 10:
             validateWeekdays.append(j)
     return validateWeekdays
 
@@ -218,16 +210,16 @@ def checkTime(times, day):
     #Only show the time of the day that has not been selected before:
     x = []
     for k in times:
-        if Table.objects.filter(day=day, time=k).count() < 1:
+        if Booking.objects.filter(day=day, time=k).count() < 1:
             x.append(k)
     return x
 
 def checkEditTime(times, day, id):
     #Only show the time of the day that has not been selected before:
     x = []
-    table = Table.objects.get(pk=id)
-    time = table.time
+    booking = Booking.objects.get(pk=id)
+    time = booking.time
     for k in times:
-        if Table.objects.filter(day=day, time=k).count() < 1 or time == k:
+        if Booking.objects.filter(day=day, time=k).count() < 1 or time == k:
             x.append(k)
     return x

@@ -31,7 +31,7 @@ TIME_CHOICES = (
 )
 
 
-class Table(models.Model):
+class Booking(models.Model):
     user = models.ForeignKey(User, null=False, blank=False, on_delete=models.CASCADE)
     guests = models.CharField(max_length=50, choices=GUESTS, default="1 guest")
     First_name = models.CharField(max_length=20, help_text='First name')
@@ -44,3 +44,5 @@ class Table(models.Model):
     address = forms.CharField(max_length=200)
     def __str__(self):
         return f"day: {self.day} | time: {self.time}"
+
+from django.contrib.auth.models import User
