@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+
+<h1>Update a booking:</h1>
+<form method="POST" action="add">
+{% csrf_token %}
+{{ form.as_p }}
+	<div>
+		<p>
+			<button type="submit">Update Item</button>
+		</p>
+	</div>
+</form>

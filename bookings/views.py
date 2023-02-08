@@ -69,6 +69,10 @@ def menu(request):
     return render(request, "menu.html", {})
 
 
+def account(request):
+    return render(request, "account.html", {})
+
+
 # form inputs
 def First_name(request):
     if request.method == "POST":
@@ -90,9 +94,18 @@ def Phone(request):
         Phone = request.POST["Phone"]
 
 
-def all_tables(request):
-    table_list = Booking.objects.all()
-    return render(request, 'account.html', {'table_list': table_list})
+# def all_tables(request):
+#     table_list = Booking.objects.all()
+#     return render(request, 'account.html', {'table_list': table_list})
+
+
+def bookingEdit(request, item_id):
+    item = get_object_or_404(Item, id=item_id)
+    form = ItemForm(instance=item)
+    context = {
+        'form': form
+    }
+    return render(request, 'todo/edit_item.html', context)
 
 
 def booking(request):
