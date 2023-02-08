@@ -4,6 +4,7 @@ from django import forms
 from cloudinary.models import CloudinaryField
 from datetime import datetime
 
+
 GUESTS = (
     ("1 guest", "1 guest"),
     ("2 guests", "2 guests"),
@@ -44,5 +45,3 @@ class Booking(models.Model):
     address = forms.CharField(max_length=200)
     def __str__(self):
         return f"day: {self.day} | time: {self.time}"
-
-from django.contrib.auth.models import User
