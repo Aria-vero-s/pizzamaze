@@ -12,7 +12,7 @@
         <tbody>
           <tr>
             <td>First name: {{ user.first_name }}</td>
-            <td><a href="">Update</a></td>
+            <td><a href="/edit/{{ edit.id }}">Edit</a></td>
           </tr>
           <tr>
             <td>Last name: {{ user.last_name }}</td>
@@ -29,7 +29,7 @@
         </tbody>
     </table>
 
-    <p><a href="">Click here</a> to cancel your booking</p>
+    <p><a href="/delete/{{ item.id }}"><button>Click here</button></a>to cancel your booking</p>
 
     </div>
 </div>

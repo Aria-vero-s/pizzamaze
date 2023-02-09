@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from datetime import datetime, timedelta
 from .models import *
 from django.contrib import messages
@@ -99,13 +99,24 @@ def Phone(request):
 #     return render(request, 'account.html', {'table_list': table_list})
 
 
-def bookingEdit(request, item_id):
-    item = get_object_or_404(Item, id=item_id)
-    form = ItemForm(instance=item)
+def bookingEdit(request, booking_id):
+    booking = get_object_or_404(Booking, id=booking_id)
+    if request.method == 'POST':
+        form = ItemForm(request.POST, instance=item)
+        if form.is_valid():
+            form.save()
+            return redirect('get_todo_list')
+    form = Booking(instance=booking)
     context = {
         'form': form
     }
-    return render(request, 'todo/edit_item.html', context)
+    return render(request, 'bookingEdit.html', context)
+
+
+def bookingDelete(request, item_id):
+    item = get_object_or_404(Item, id=item_id)
+    delete.item()
+    return redirect('account')
 
 
 def booking(request):
@@ -114,7 +125,7 @@ def booking(request):
 
     # Only show the days that are not full:
     validateWeekdays = isWeekdayValid(weekdays)
-    
+
     if request.method == 'POST':
 
         day = request.POST.get('day')

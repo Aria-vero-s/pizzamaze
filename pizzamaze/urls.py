@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from bookings import views
 
 
 urlpatterns = [
@@ -22,4 +23,6 @@ urlpatterns = [
     path('', include("bookings.urls")), #Added
     path('bookings/', include('django.contrib.auth.urls')),
     path('bookings/', include('bookings.urls')),
+    path('edit/<edit_id>', views.bookingEdit, name='edit'),
+    path('delete/<edit_id>', views.bookingDelete, name='delete'),
 ]

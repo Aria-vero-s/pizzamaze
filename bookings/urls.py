@@ -14,5 +14,4 @@ urlpatterns = [
     path('register_user', views.register_user, name="register_user"),
     path('account', views.account, name="account"),
     # path('tables', views.all_tables, name="list-tables"),
-    path('edit/<item_id>', bookingEdit, name='edit'),
 ]
