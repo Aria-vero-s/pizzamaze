@@ -6,7 +6,7 @@ from django.urls import path
 from . import views
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
-from .forms import RegisterUserForm
+from .forms import RegisterUserForm, BookingForm
 from .models import Booking
 
 
@@ -69,10 +69,6 @@ def menu(request):
     return render(request, "menu.html", {})
 
 
-def account(request):
-    return render(request, "account.html", {})
-
-
 # form inputs
 def First_name(request):
     if request.method == "POST":
@@ -99,23 +95,31 @@ def Phone(request):
 #     return render(request, 'account.html', {'table_list': table_list})
 
 
+def account(request):
+    bookings = Booking.objects.all()
+    context = {
+        'bookings': bookings
+    }
+    return render(request, 'account.html', context)
+
+
 def bookingEdit(request, booking_id):
     booking = get_object_or_404(Booking, id=booking_id)
     if request.method == 'POST':
-        form = ItemForm(request.POST, instance=item)
+        form = BookingForm(request.POST, instance=booking)
         if form.is_valid():
             form.save()
-            return redirect('get_todo_list')
-    form = Booking(instance=booking)
+            return redirect('account')
+    form = BookingForm(instance=booking)
     context = {
         'form': form
     }
     return render(request, 'bookingEdit.html', context)
 
 
-def bookingDelete(request, item_id):
-    item = get_object_or_404(Item, id=item_id)
-    delete.item()
+def bookingDelete(request, booking_id):
+    booking = get_object_or_404(Booking, id=booking_id)
+    booking.delete()
     return redirect('account')
 
 
@@ -177,7 +181,7 @@ def bookingSubmit(request):
 
         if GUESTS != None:
             if day <= maxDate and day >= minDate:
-                if date == 'Monday' or date == 'Saturday' or date == 'Wednesday':
+                if date == 'Tuesday' or date == 'Wednesday' or date == 'Thursday' or date == 'Friday' or date == 'Saturday' or date == 'Sunday':
                     if Booking.objects.filter(day=day).count() < 11:
                         if Booking.objects.filter(day=day, time=time).count() < 1:
                             BookingForm = Booking.objects.get_or_create(

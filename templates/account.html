@@ -2,36 +2,49 @@
 {% load static %}
 {% block body %}
 	
+
 <div class="container-fluid" style="padding: 40px;">
-    <h2>Welcome, {{ user.username }}</h2>
+  {% for booking in bookings %}
+    <h2>Welcome, {{ booking.First_name }}</h2>
     <div class="shadow p-4 mb-5 bg-body bg-body rounded text-black text-center m-5">
-
-    <p>View and edit your booking</p>
-
+    <td><a href="/edit/{{ booking.id }}">Click here</a> to edit your booking</td>
+    {% endfor %}
     <table class="table" style="text-align: left;">
         <tbody>
+          {% for booking in bookings %}
           <tr>
-            <td>First name: {{ user.first_name }}</td>
-            <td><a href="/edit/{{ edit.id }}">Edit</a></td>
+            <td>First name: {{ booking.First_name }}</td>
           </tr>
           <tr>
-            <td>Last name: {{ user.last_name }}</td>
-            <td><a href="">Update</a></td>
+            <td>Last name: {{ booking.Last_name }}</td>
           </tr>
           <tr>
-            <td>Email: {{ user.email }}</td>
-            <td><a href="">Update</a></td>
+            <td>Email: {{ booking.Email }}</td>
           </tr>
           <tr>
-            <td>ID: {{ user.id }}</td>
-            <td><a href="">Update</a></td>
+            <td>Phone: {{ booking.Phone }}</td>
+          </tr>
+          <tr>
+            <td>Guests: {{ booking.guests }}</td>
+          </tr>
+          <tr>
+            <td>Day: {{ booking.day }}</td>
+          </tr>
+          <tr>
+            <td>Time: {{ booking.time }}</td>
           </tr>
         </tbody>
+        {% empty %}
+        <p>You have no booking. To make a booking, <a href="{% url 'booking' %}">click here</a></p>
+        {% endfor %}
     </table>
-
-    <p><a href="/delete/{{ item.id }}"><button>Click here</button></a>to cancel your booking</p>
-
+    {% for booking in bookings %}
+    <p><a href="/delete/{{ booking.id }}">Click here</a> to cancel your booking</p>
+    {% endfor %}
+    
     </div>
+  </div>
+</div>
 </div>
 
 	

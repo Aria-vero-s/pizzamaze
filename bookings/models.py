@@ -42,9 +42,6 @@ class Booking(models.Model):
     day = models.DateField(default=datetime.now)
     time = models.CharField(max_length=10, choices=TIME_CHOICES, default="3 PM")
     time_ordered = models.DateTimeField(default=datetime.now, blank=True)
-    address = forms.CharField(max_length=200)
-    name = models.CharField(max_length=50, null=False, blank=False)
-    done = models.BooleanField(null=False, blank=False, default=False)
 
     def __str__(self):
         return f"day: {self.day} | time: {self.time}"

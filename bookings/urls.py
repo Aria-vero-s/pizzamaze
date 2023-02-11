@@ -13,5 +13,7 @@ urlpatterns = [
     path('logout', views.logout_user, name="logout"),
     path('register_user', views.register_user, name="register_user"),
     path('account', views.account, name="account"),
+    path('edit/<booking_id>', views.bookingEdit, name='edit'),
+    path('delete/<booking_id>', views.bookingDelete, name='delete'),
     # path('tables', views.all_tables, name="list-tables"),
 ]

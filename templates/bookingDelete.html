@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+
+
+
+<div class="container-fluid" style="padding: 40px;">
+    <h2>Delete a booking:</h2>
+    <div class="shadow p-4 mb-5 bg-body bg-body rounded text-black m-5">
+
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div>
+            <p>
+                <button type="submit">Delete Item</button>
+            </p>
+        </div>
+    </form>
+    </div>
+</div>
+{% endblock %}
