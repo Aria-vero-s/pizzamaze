@@ -22,6 +22,53 @@ body{
   margin-bottom: -20px;
 }
 
+/* Home page */
+
+.introduction {
+  padding:250px;
+  text-align:center;
+  color:#ef8354;
+  background-color: #fff;
+}
+
+@media (max-width: 1000px) {
+  .introduction{
+    padding:100px;
+  }
+}
+
+.gallery {
+  min-height:auto;
+  text-align: center;
+}
+
+.gallery img{
+  margin: 20px;
+  width: 800px;
+  height: 200px;
+  object-fit: cover;
+  overflow: hidden;
+  border-radius: 20px;
+}
+
+@media (max-width: 1000px) {
+  .gallery img{
+    width: 600px;
+  }
+}
+
+@media (max-width: 800px) {
+    .gallery img{
+      width: 400px;
+    }
+}
+
+@media (max-width: 600px) {
+  .gallery img{
+    display: none;
+  }
+}
+
 /* Menu */
 
 .menu-container-1 {

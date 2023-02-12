@@ -12,5 +12,6 @@
 
 ## Ressources
 
-Media ressources from: https://unsplash.com/fr/photos/17ZU9BPy_Q4
-Mockup generator from: https://www.name-generator.org.uk/food/
+Media ressources from: https://unsplash.com/
+AI menu generator from: https://www.name-generator.org.uk/food/
+Mockup generator from: 
