@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django import forms
 from cloudinary.models import CloudinaryField
 from datetime import datetime
+from django.utils import timezone
 
 
 GUESTS = (
@@ -45,3 +46,4 @@ class Booking(models.Model):
 
     def __str__(self):
         return f"day: {self.day} | time: {self.time}"
+

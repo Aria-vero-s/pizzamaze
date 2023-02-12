@@ -59,9 +59,19 @@
                 <h3 class="">Phone number:</h3>
                     <input id="Phone" type="text" name="Phone" value="{{ Phone }}">
             </div>
+        
+            <!--input time-->
+            <h3 class="text-center fPersian mt-4">Time:</h3>
+            <div>
+                <select class="form-select fs-3 text-center" name="time">
+                    {% for time in times %}
+                    <option value="{{time}}">{{time}}</option>
+                    {% endfor %}
+                </select>
+            </div>
 
             <br/>
-            <button type="submit" class="btn btn-primary text-white">Continue</button>
+            <button type="submit" class="btn btn-primary text-white">Submit</button>
         </div>
     </form>
 </div>

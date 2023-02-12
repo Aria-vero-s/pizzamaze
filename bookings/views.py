@@ -90,11 +90,6 @@ def Phone(request):
         Phone = request.POST["Phone"]
 
 
-# def all_tables(request):
-#     table_list = Booking.objects.all()
-#     return render(request, 'account.html', {'table_list': table_list})
-
-
 def account(request):
     bookings = Booking.objects.all()
     context = {
@@ -124,12 +119,6 @@ def bookingDelete(request, booking_id):
 
 
 def booking(request):
-    # Calling 'validWeekday' Function to Loop days you want in the next 21 days:
-    weekdays = validWeekday(22)
-
-    # Only show the days that are not full:
-    validateWeekdays = isWeekdayValid(weekdays)
-
     if request.method == 'POST':
 
         day = request.POST.get('day')
@@ -147,67 +136,41 @@ def booking(request):
         request.session['Email'] = Email
         request.session['Phone'] = Phone
 
-        return redirect('bookingSubmit')
-
-    return render(request, 'booking.html', {
-            'weekdays': weekdays,
-            'validateWeekdays': validateWeekdays,
-        })
-
-
-def bookingSubmit(request):
-    times = [
-        "9 AM", "10 AM", "11 AM", "12 PM", "3 PM", "4 PM", "5 PM", "6 PM", "7 PM", "8 PM", "9 PM"
-    ]
-    today = datetime.now()
-    minDate = today.strftime('%Y-%m-%d')
-    deltatime = today + timedelta(days=21)
-    strdeltatime = deltatime.strftime('%Y-%m-%d')
-    maxDate = strdeltatime
-
-    # Get stored data from django session:
-    day = request.session.get('day')
-    guests = request.session.get('guests')
-    First_name = request.session.get('First_name')
-    Last_name = request.session.get('Last_name')
-    Email = request.session.get('Email')
-    Phone = request.session.get('Phone')
-
-    # Only show the time of the day that has not been selected before:
-    hour = checkTime(times, day)
-    if request.method == 'POST':
+        today = datetime.now()
+        minDate = today.strftime('%Y-%m-%d')
+        deltatime = today + timedelta(days=21)
+        strdeltatime = deltatime.strftime('%Y-%m-%d')
+        maxDate = strdeltatime
         time = request.POST.get("time")
         date = dayToWeekday(day)
 
-        if GUESTS != None:
-            if day <= maxDate and day >= minDate:
-                if date == 'Tuesday' or date == 'Wednesday' or date == 'Thursday' or date == 'Friday' or date == 'Saturday' or date == 'Sunday':
-                    if Booking.objects.filter(day=day).count() < 11:
-                        if Booking.objects.filter(day=day, time=time).count() < 1:
-                            BookingForm = Booking.objects.get_or_create(
-                                guests=guests,
-                                First_name=First_name,
-                                Last_name=Last_name,
-                                Email=Email,
-                                Phone=Phone,
-                                day=day,
-                                time=time,
-                                user=request.user,
-                            )
-                            messages.success(request, "Booking Saved!")
-                            return redirect('index')
-                        else:
-                            messages.success(request, "The Selected Time Has Been Reserved Before!")
-                    else:
-                        messages.success(request, "The Selected Day Is Full!")
-                else:
-                    messages.success(request, "The Selected Date Is Incorrect")
+        if Booking.objects.filter(day=day).count() < 11:
+            if Booking.objects.filter(day=day, time=time).count() < 1:
+                BookingForm = Booking.objects.get_or_create(
+                    guests=guests,
+                    First_name=First_name,
+                    Last_name=Last_name,
+                    Email=Email,
+                    Phone=Phone,
+                    day=day,
+                    time=time,
+                    user=request.user,
+                )
+                messages.success(request, "Booking Saved!")
+                return redirect('index')
             else:
-                messages.success(request, "The Selected Date Isn't In The Correct Time Period!")
+                messages.success(request, "The Selected Time Has Been Reserved Before!")
         else:
-            messages.success(request, "Please select the amounts of guests!")
-    return render(request, 'bookingSubmit.html', {
-        'times': hour,
+            messages.success(request, "The Selected Day Is Full!")
+    # Calling 'validWeekday' Function to Loop days you want in the next 21 days:
+    weekdays = validWeekday(22)
+
+    # Only show the days that are not full:
+    validateWeekdays = isWeekdayValid(weekdays)
+    return render(request, 'booking.html', {
+        'times': ["9 AM", "10 AM", "11 AM", "12 PM", "3 PM", "4 PM", "5 PM", "6 PM", "7 PM", "8 PM", "9 PM"],
+        'weekdays': validWeekday(22),
+        'validateWeekdays': isWeekdayValid(weekdays),
     })
 
 
@@ -223,7 +186,7 @@ def validWeekday(days):
     for i in range (0, days):
         x = today + timedelta(days=i)
         y = x.strftime('%A')
-        if y == 'Tuesday' or y == 'Wednesday' or y == 'Thursday' or y == 'Friday' or y == 'Saturday' or y == 'Sunday' :
+        if y == 'Tuesday' or y == 'Wednesday' or y == 'Thursday' or y == 'Friday' or y == 'Saturday' or y == 'Sunday':
             weekdays.append(x.strftime('%Y-%m-%d'))
     return weekdays
     
