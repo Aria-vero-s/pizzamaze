@@ -69,6 +69,10 @@ def menu(request):
     return render(request, "menu.html", {})
 
 
+def notRegistered(request):
+    return render(request, "notRegistered.html", {})
+
+
 # form inputs
 def First_name(request):
     if request.method == "POST":

@@ -65,7 +65,7 @@ body{
   border-radius: 20px;
 }
 
-.gallery-menu a{
+.gallery a{
   font-size: 70px;
   font-weight: bold;
   position: absolute;
@@ -91,7 +91,7 @@ body{
     .gallery img{
       width: 400px;
     }
-    .gallery-menu a {
+    .gallery a {
       width: 300px;
       height:300px;
       line-height: 300px;
@@ -100,10 +100,14 @@ body{
 
 @media (max-width: 600px) {
   .gallery img{
-    display: none;
+    width: 300px;
+    height:150px;
   }
-  .gallery-menu a {
-    display: none;
+  .gallery a {
+    width: 200px;
+    height:200px;
+    line-height: 200px;
+    font-size: large;
   }
 }
 
@@ -166,7 +170,9 @@ body{
   }
   
   .menu-container-1 img {
-    display: none;
+    width:100%;
+    margin:0px !important;
+    height:150px;
   }
 
   .menu-container-2 {
@@ -175,7 +181,32 @@ body{
   }
   
   .menu-container-2 img {
-    display: none;
+    width:100%;
+    margin:0px !important;
+    height:150px;
+  }
+}
+
+/* Responsive page container */
+
+.container {
+  padding-top: 40px !important;
+  padding-bottom: 40px !important;
+  margin-top: 20px !important;
+}
+
+@media (max-width: 600px) {
+  .container {
+    color: red;
+    width:100%;
+    padding-left:10px !important;
+    padding-right:10px !important;
+  }
+  .container h2 {
+    padding-left: 40px;
+  }
+  .container iframe {
+    height: 400px;
   }
 }
 

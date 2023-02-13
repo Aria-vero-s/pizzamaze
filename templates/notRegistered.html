@@ -14,16 +14,11 @@
 {% endif %}
 
 <div class="container container-fluid" style="padding: 40px;">
-    <h2>Register</h2>
-    <div class="container shadow bg-body rounded text-black text-left">
-    <form action="{% url 'register_user' %}" method=POST style="padding:40px;">
-      {% csrf_token %}
+    <h2>Online booking</h2>
+    <div class="container shadow bg-body rounded text-black text-center">
+        <p>You need to create an account in order to make a reservation with us.</p>
+        <p><a href="{% url 'register_user' %}">Click here</a> to create an account.</p>
 
-			{{ form.as_p }}
-
-          <input type="submit" value="Submit" class="btn btn-primary">
-
-		</form>
   </div>
 </div>
 

@@ -16,14 +16,18 @@
     <img src={% static "lasagne.avif" %}>
     <br>
     <img src={% static "soup.avif" %}>
-    <div class="gallery-menu"><a href="{% url 'menu' %}">MENU</a></div>
+    <a href="{% url 'menu' %}">MENU</a>
     <br>
     <img src={% static "pasta.avif" %}>
 </div>
 
 
 <div class="introduction">
-    <button class="btn btn-outline-secondary" style="padding: 40px; font-size: xx-large;">Book now!</button>
+    {% if user.is_authenticated %}
+    <a href="{% url 'booking' %}" class="btn btn-outline-secondary" style="padding:40px; font-size: xx-large;">Book now!</a>
+    {% else %}
+    <a href="{% url 'notRegistered' %}" class="btn btn-outline-secondary" style="padding:40px; font-size: xx-large;">Book now!</a>
+    {% endif %}
 </div>
 </div>
 

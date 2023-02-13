@@ -28,21 +28,29 @@
     <a class="navbar-brand" href="{% url 'index' %}"><strong>Pizza</strong>maze</a>
       <div class="row">
         <div class="col-md-10">
+          {% if user.is_authenticated %}
           <a href="{% url 'booking' %}" class="btn btn-outline-secondary float-end">Book now!</a>
+          {% else %}
+          <a href="{% url 'notRegistered' %}" class="btn btn-outline-secondary float-end">Book now!</a>
+          {% endif %}
             <h2 style="margin-left: 40px;">Italian restaurant</h2>
         </div>
       </div>
 
-    <nav class="navbar nav-color navbar-expand-lg navbar-dark">
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <nav class="navbar navbar-expand-lg navbar-dark">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="collapse navbar-collapse" id="collapsibleNavbar">
         <div class="navbar-nav">
-          <a class="nav-item nav-link active" href="{% url 'index' %}">Home <span class="sr-only"></span></a>
+          <a class="nav-item nav-link" href="{% url 'index' %}">Home <span class="sr-only"></span></a>
           <a class="nav-item nav-link" href="{% url 'about' %}">About</a>
           <a class="nav-item nav-link" href="{% url 'menu' %}">Menu</a>
+          {% if user.is_authenticated %}
           <a class="nav-item nav-link" href="{% url 'booking' %}">Booking</a>
+          {% else %}
+          <a class="nav-item nav-link" href="{% url 'notRegistered' %}">Booking</a>
+          {% endif %}
           <a class="nav-item nav-link" href="{% url 'contact' %}">Contact</a>
           
         </div>
@@ -50,11 +58,12 @@
           {% if user.is_authenticated %}
           <a class="nav-item nav-link" href="{% url 'account' %}">Account</a>
           <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
-          <a class="nav-item nav-link" href="{% url 'admin:index' %}">Staff</a>
           {% else %}
           <a class="nav-item nav-link" href="{% url 'register_user' %}">Signup</a>
           <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
-          <a class="nav-item nav-link" href="{% url 'admin:index' %}">Staff</a>
+          {% endif %}
+          {% if user.is_superuser %}
+          <a class="nav-item nav-link" href="{% url 'admin:index' %}">Staff panel</a>
           {% endif %}
         </div>
       </div>
@@ -89,6 +98,7 @@
             <h5 class="text-uppercase fw-bold mb-4 textGradient" id="contact">Contact Us</h5>
             <a href="tel: 12345678">Tel: 12345678</a></br>
             <a href="{% url 'booking' %}">Online Booking</a></br>
+            <a href="{% url 'contact' %}">Contact form</a></br>
           </div>
           <!-- Grid column -->
                 

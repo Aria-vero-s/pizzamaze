@@ -35,13 +35,13 @@ TIME_CHOICES = (
 
 class Booking(models.Model):
     user = models.ForeignKey(User, null=False, blank=False, on_delete=models.CASCADE)
-    guests = models.CharField(max_length=50, choices=GUESTS, default="1 guest")
-    First_name = models.CharField(max_length=20, help_text='First name')
-    Last_name = models.CharField(max_length=20, help_text='Last name')
-    Email = models.EmailField(max_length=20, help_text='Email')
-    Phone = models.CharField(max_length=20, help_text='Phone')
+    guests = models.CharField(max_length=50, choices=GUESTS, default="1 guest", blank=False, null=False)
+    First_name = models.CharField(max_length=20, help_text='First name', blank=False, null=False)
+    Last_name = models.CharField(max_length=20, help_text='Last name', blank=False, null=False)
+    Email = models.EmailField(max_length=20, help_text='Email', blank=False, null=False)
+    Phone = models.CharField(max_length=20, help_text='Phone', blank=False, null=False)
     day = models.DateField(default=datetime.now)
-    time = models.CharField(max_length=10, choices=TIME_CHOICES, default="3 PM")
+    time = models.CharField(max_length=10, choices=TIME_CHOICES, blank=False, null=False)
     time_ordered = models.DateTimeField(default=datetime.now, blank=True)
 
     def __str__(self):
