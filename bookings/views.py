@@ -8,7 +8,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from .forms import RegisterUserForm, BookingForm
 from .models import Booking
-
+from django.views.generic import ListView
+from django.views import generic
 
 # login / logout / user registration system
 def login_user(request):
@@ -42,7 +43,7 @@ def register_user(request):
             user = authenticate(username=username, password=password)
             login(request, user)
             messages.success(request, ("Resigstration successful!"))
-            return redirect('index')
+            return redirect('booking')
     else:
         form = RegisterUserForm()
     return render(request, 'register_user.html', {'form': form, })
@@ -95,7 +96,7 @@ def Phone(request):
 
 
 def account(request):
-    bookings = Booking.objects.all()
+    bookings = Booking.objects.filter(user=request.user)
     context = {
         'bookings': bookings
     }
@@ -161,7 +162,7 @@ def booking(request):
                     user=request.user,
                 )
                 messages.success(request, "Booking Saved!")
-                return redirect('index')
+                return redirect('account')
             else:
                 messages.success(request, "The Selected Time Has Been Reserved Before!")
         else:
@@ -183,8 +184,9 @@ def dayToWeekday(x):
     y = z.strftime('%A')
     return y
 
+
 def validWeekday(days):
-    #Loop days you want in the next 21 days:
+    # Loop days you want in the next 21 days:
     today = datetime.now()
     weekdays = []
     for i in range (0, days):
@@ -193,7 +195,8 @@ def validWeekday(days):
         if y == 'Tuesday' or y == 'Wednesday' or y == 'Thursday' or y == 'Friday' or y == 'Saturday' or y == 'Sunday':
             weekdays.append(x.strftime('%Y-%m-%d'))
     return weekdays
-    
+
+
 def isWeekdayValid(x):
     validateWeekdays = []
     for j in x:
@@ -201,16 +204,18 @@ def isWeekdayValid(x):
             validateWeekdays.append(j)
     return validateWeekdays
 
+
 def checkTime(times, day):
-    #Only show the time of the day that has not been selected before:
+    # Only show the time of the day that has not been selected before:
     x = []
     for k in times:
         if Booking.objects.filter(day=day, time=k).count() < 1:
             x.append(k)
     return x
 
+
 def checkEditTime(times, day, id):
-    #Only show the time of the day that has not been selected before:
+    # Only show the time of the day that has not been selected before:
     x = []
     booking = Booking.objects.get(pk=id)
     time = booking.time

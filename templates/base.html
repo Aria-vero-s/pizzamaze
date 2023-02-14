@@ -56,7 +56,7 @@
         </div>
         <div class="navbar-nav ms-auto">
           {% if user.is_authenticated %}
-          <a class="nav-item nav-link" href="{% url 'account' %}">Account</a>
+          <a class="nav-item nav-link" href="{% url 'account' %}">Your booking</a>
           <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
           {% else %}
           <a class="nav-item nav-link" href="{% url 'register_user' %}">Signup</a>

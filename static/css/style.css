@@ -22,26 +22,49 @@ body{
   margin-bottom: -20px;
 }
 
-/* Home page */
+
+.btn-outline-secondary, .btn-outline-secondary:active, .btn-outline-secondary:visited {
+  color:#fff;
+  background-color: #6d6875;
+  border-color: #6d6875;
+  will-change: transform;
+  transition: transform 450ms;
+}
+
+.btn-outline-secondary:hover {
+  color:#ef8354;
+  background-color: #EEF0F2;
+  border-color: #ef8354;
+  transition: transform 125ms;
+  transform: translateY(-10px);
+}
+
+@media (max-width: 800px) {
+    .btn-outline-secondary {
+        margin-right: 40px;
+        margin-bottom: 10px;
+    }
+}
+
+.btn-primary, .btn-primary:active, .btn-primary:visited {
+  color:#fff;
+  background-color: #6d6875;
+  border-color: #6d6875;
+}
+
+.btn-primary:hover {
+  background-color: #EF8354;
+  color: #fafafa;
+  border-color: #6d6875;
+}
+
+/* index page */
 
 .introduction {
   padding:250px;
   text-align:center;
   color:#ef8354;
   background-color: #fff;
-}
-
-.introduction h1:hover {
-  animation: expand .8s ease forwards .5s;
-}
-
-@keyframes expand {
-  0% {
-  transform: translateX(1400px);
-  }
-  100% {
-  transform: translateX(0px);
-  }
 }
 
 @media (max-width: 1000px) {
@@ -239,41 +262,6 @@ body{
 }
 .text-input:hover{
   border-color: #EF8354;
-}
-
-.btn-outline-secondary, .btn-outline-secondary:active, .btn-outline-secondary:visited {
-  color:#fff;
-  background-color: #6d6875;
-  border-color: #6d6875;
-  will-change: transform;
-  transition: transform 450ms;
-}
-
-.btn-outline-secondary:hover {
-  color:#ef8354;
-  background-color: #EEF0F2;
-  border-color: #ef8354;
-  transition: transform 125ms;
-  transform: translateY(-10px);
-}
-
-@media (max-width: 800px) {
-    .btn-outline-secondary {
-        margin-right: 40px;
-        margin-bottom: 10px;
-    }
-}
-
-.btn-primary, .btn-primary:active, .btn-primary:visited {
-  color:#fff;
-  background-color: #6d6875;
-  border-color: #6d6875;
-}
-
-.btn-primary:hover {
-  background-color: #EF8354;
-  color: #fafafa;
-  border-color: #6d6875;
 }
 
 .submit-button{

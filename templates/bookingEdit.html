@@ -16,6 +16,10 @@
                 <button type="submit" class="btn btn-primary">Update booking</button>
             </p>
         </div>
+        {% for booking in bookings %}
+        <p><a href="/delete/{{ booking.id }}">Click here</a> to cancel your booking</p>
+        {% endfor %}
+        
     </form>
     </div>
 </div>
